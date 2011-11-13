@@ -209,8 +209,8 @@ public class DoMonkey implements IRobot {
 	      // no implementation on android
 	   }
 
-	   //FIXME: use in-memory conversion instead
-	   public ScreenImage captureScreen(Rectangle screenRect){
+	   //FIXED: use in-memory conversion instead
+	   public ScreenImage captureSnapshot(Rectangle screenRect){
 	      Debug.log(5, "MonkeyRobot.captureScreen " + screenRect.toString());
 	      IChimpImage img = _device.takeSnapshot();
 	      String filename = "/tmp/seemonkey_screen.png";
@@ -226,6 +226,19 @@ public class DoMonkey implements IRobot {
 	         
 	         return null;
 	      }
+	   }
+	   public ScreenImage captureScreen(Rectangle screenRect) {
+		   IChimpImage img = _device.takeSnapshot();
+		   try{
+			   BufferedImage bimg = img.getBufferedImage();
+			   return new ScreenImage(screenRect, bimg.getSubimage(screenRect.x, screenRect.y, screenRect.width, screenRect.height));
+		   } catch(Exception e) {
+			   System.out.println("BufferedImage failure!");
+			   e.printStackTrace();
+			   return null;
+		   }
+		   
+		   
 	   }
 
 	   public void waitForIdle(){
