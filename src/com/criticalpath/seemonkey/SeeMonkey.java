@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.sikuli.script.*;
 
 import com.android.chimpchat.*;
+import com.android.chimpchat.adb.AdbChimpDevice;
 import com.android.chimpchat.core.*;
 
 public class SeeMonkey extends Region implements IScreen{
@@ -18,10 +19,12 @@ public class SeeMonkey extends Region implements IScreen{
 	public int longPressDelay = 1000;
 	
 	public SeeMonkey() {
+		setAutoWaitTimeout(1000);
 		waitForConnection();
 	}
 	
 	public SeeMonkey(long timeout, String deviceId) {
+		setAutoWaitTimeout(1000);
 		waitForConnection(timeout, deviceId);
 	}
 	

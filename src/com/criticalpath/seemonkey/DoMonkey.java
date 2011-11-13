@@ -15,8 +15,8 @@ import org.sikuli.script.IRobot;
 
 //import com.android.chimpchat.*;
 //import com.android.chimpchat.adb.*;
+import com.android.chimpchat.adb.AdbChimpDevice;
 import com.android.chimpchat.core.*;
-import com.android.chimpchat.core.TouchPressType;
 import com.android.monkeyrunner.MonkeyDevice;
 public class DoMonkey implements IRobot {
 	   protected IChimpDevice _device;
@@ -231,9 +231,9 @@ public class DoMonkey implements IRobot {
 		   IChimpImage img = _device.takeSnapshot();
 		   try{
 			   BufferedImage bimg = img.getBufferedImage();
-			   return new ScreenImage(screenRect, bimg.getSubimage(screenRect.x, screenRect.y, screenRect.width, screenRect.height));
+			   return new ScreenImage(screenRect, bimg);
 		   } catch(Exception e) {
-			   System.out.println("BufferedImage failure!");
+			   Debug.error("BufferedImage failure!");
 			   e.printStackTrace();
 			   return null;
 		   }

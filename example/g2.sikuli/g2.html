@@ -75,8 +75,8 @@
 <span class="kw">from</span> org.sikuli.script <span class="kw">import</span> Settings
 
 Settings.MoveMouseDelay = <span class="dig">0.01</span>
-Settings.AutoWaitTimeout = <span class="dig">100</span>
-
+<span class="cmt">#Settings.AutoWaitTimeout = 100
+</span>
 <span class="kw">print</span> <span class="str">"set up android connection"</span>
 scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</span>
 
@@ -105,17 +105,23 @@ keypad = {<span class="dig">0</span>:<img src="1321122943551.png" />,
 </span><span class="cmt">#scr.wait("1321123758493.png")
 </span><span class="cmt">#scr.click("1321123758493.png")
 </span><span class="cmt">#scr.wait("DEFABC5jKLMN.png")
-</span>scr.<span class="skw">click</span>(keypad[<span class="dig">5</span>])
-scr.<span class="skw">click</span>(keypad[<span class="dig">0</span>])
-scr.<span class="skw">click</span>(keypad[<span class="dig">3</span>])
-scr.<span class="skw">click</span>(keypad[<span class="dig">7</span>])
-scr.<span class="skw">click</span>(keypad[<span class="dig">6</span>])
-scr.<span class="skw">click</span>(keypad[<span class="dig">4</span>])
+</span><span class="kw">print</span>(<span class="str">"pre-sleep"</span>)
+scr.<span class="skw">sleep</span>(<span class="dig">100000</span>)
+<span class="kw">print</span>(<span class="str">"post-sleep"</span>)
+<span class="kw">print</span>(<span class="str">"clicking..."</span>)
 scr.<span class="skw">click</span>(keypad[<span class="dig">5</span>])
-scr.<span class="skw">click</span>(keypad[<span class="dig">6</span>])
-scr.<span class="skw">click</span>(keypad[<span class="dig">7</span>])
-scr.<span class="skw">click</span>(keypad[<span class="dig">9</span>])
-
+scr.<span class="skw">click</span>(keypad[<span class="dig">0</span>])
+scr.<span class="skw">sleep</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">3</span>])
+<span class="cmt">#scr.click(keypad[3])
+</span><span class="cmt">#scr.click(keypad[7])
+</span><span class="cmt">#scr.click(keypad[6])
+</span><span class="cmt">#scr.click(keypad[4])
+</span><span class="cmt">#scr.click(keypad[5])
+</span><span class="cmt">#scr.click(keypad[6])
+</span><span class="cmt">#scr.click(keypad[7])
+</span><span class="cmt">#scr.click(keypad[9])
+</span>
 <span class="cmt">#scr.click("1321123015142.png")
 </span><span class="cmt">#scr.wait("1321123362465.png")
 </span>exit(<span class="dig">0</span>)

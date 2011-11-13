@@ -3,7 +3,7 @@ from com.android.monkeyrunner import MonkeyDevice
 from org.sikuli.script import Settings
 
 Settings.MoveMouseDelay = 0.01
-Settings.AutoWaitTimeout = 100
+#Settings.AutoWaitTimeout = 100
 
 print "set up android connection"
 scr = SeeMonkey() # compatiable with Sikuli Screen/Region
@@ -33,16 +33,22 @@ keypad = {0:"1321122943551.png",
 #scr.wait("1321123758493.png")
 #scr.click("1321123758493.png")
 #scr.wait("DEFABC5jKLMN.png")
+print("pre-sleep")
+scr.sleep(100000)
+print("post-sleep")
+print("clicking...")
 scr.click(keypad[5])
 scr.click(keypad[0])
+scr.sleep(1000)
 scr.click(keypad[3])
-scr.click(keypad[7])
-scr.click(keypad[6])
-scr.click(keypad[4])
-scr.click(keypad[5])
-scr.click(keypad[6])
-scr.click(keypad[7])
-scr.click(keypad[9])
+#scr.click(keypad[3])
+#scr.click(keypad[7])
+#scr.click(keypad[6])
+#scr.click(keypad[4])
+#scr.click(keypad[5])
+#scr.click(keypad[6])
+#scr.click(keypad[7])
+#scr.click(keypad[9])
 
 #scr.click("1321123015142.png")
 #scr.wait("1321123362465.png")
