@@ -75,47 +75,59 @@
 <span class="kw">from</span> org.sikuli.script <span class="kw">import</span> Settings
 
 Settings.MoveMouseDelay = <span class="dig">0.01</span>
-Settings.AutoWaitTimeout = <span class="dig">10</span>
+Settings.AutoWaitTimeout = <span class="dig">100</span>
 
 <span class="kw">print</span> <span class="str">"set up android connection"</span>
 scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</span>
 
 <span class="kw">assert</span> scr != None
 dev = scr.getMonkeyDevice() <span class="cmt"># Android Monkey device</span>
-scr.autoDelay = <span class="dig">500</span>
+scr.autoDelay = <span class="dig">1000</span>
 
 
-keypad = {<span class="str">"1"</span>:<img src="1321122812838.png" />,
-        <span class="str">"2"</span>:<img src="ABC.png" />,
-        <span class="str">"3"</span>:<img src="DEF.png" />,
-        <span class="str">"4"</span>:<img src="GHI.png" />,
-        <span class="str">"5"</span>:<img src="5jKL.png" />,
-        <span class="str">"6"</span>:<img src="MN0.png" />,
-        <span class="str">"7"</span>:<img src="7PQRS.png" />,
-        <span class="str">"8"</span>:<img src="TUV.png" />,
-        <span class="str">"9"</span>:<img src="WXYZ.png" />,
-        <span class="str">"0"</span>:<img src="1321122943551.png" />}
+keypad = {<span class="dig">0</span>:<img src="1321122943551.png" />,
+    <span class="dig">1</span>:<img src="1321122812838.png" />,
+    <span class="dig">2</span>:<img src="ABC.png" />,
+    <span class="dig">3</span>:<img src="DEF.png" />,
+    <span class="dig">4</span>:<img src="GHI.png" />,
+    <span class="dig">5</span>:<img src="5jKL.png" />,
+    <span class="dig">6</span>:<img src="MN0.png" />,
+    <span class="dig">7</span>:<img src="7PQRS.png" />,
+    <span class="dig">8</span>:<img src="TUV.png" />,
+    <span class="dig">9</span>:<img src="WXYZ.png" />}
 
 <span class="cmt">#scr.wake()
 </span><span class="cmt">#if scr.exists("1321123632123.png"): 
 </span><span class="cmt">#    scr.dragDrop("1321123632123.png","7.png")
-</span>scr.<span class="skw">click</span>(<img src="1321123737364.png" />)
-scr.<span class="skw">wait</span>(<img src="1321123758493.png" />)
-scr.<span class="skw">click</span>(<img src="1321123758493.png" />)
-scr.<span class="skw">wait</span>(<img src="DEFABC5jKLMN.png" />)
-scr.<span class="skw">click</span>(keypad[<span class="str">"5"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"0"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"3"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"4"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"6"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"7"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"1"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"2"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"3"</span>])
-scr.<span class="skw">click</span>(keypad[<span class="str">"5"</span>])
-scr.<span class="skw">click</span>(<img src="1321123015142.png" />)
-scr.<span class="skw">sleep</span>(<span class="dig">3000</span>)
-scr.<span class="skw">wait</span>(<img src="1321123362465.png" />)
+</span><span class="cmt">#if scr.exists("1321123737364.png"):
+</span><span class="cmt">#    scr.click("1321123737364.png")
+</span><span class="cmt">#    print("This was matched, apparently")
+</span><span class="cmt">#scr.wait("1321123758493.png")
+</span><span class="cmt">#scr.click("1321123758493.png")
+</span><span class="cmt">#scr.wait("DEFABC5jKLMN.png")
+</span>scr.<span class="skw">click</span>(keypad[<span class="dig">5</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">0</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">3</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">7</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">6</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">4</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">5</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">6</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">7</span>])
+<span class="skw">wait</span>(<span class="dig">1000</span>)
+scr.<span class="skw">click</span>(keypad[<span class="dig">9</span>])
+
+<span class="cmt">#scr.click("1321123015142.png")
+</span><span class="cmt">#scr.wait("1321123362465.png")
+</span>exit()
 </pre>
 </body>
 </html>

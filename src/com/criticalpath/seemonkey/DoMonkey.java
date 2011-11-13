@@ -223,6 +223,7 @@ public class DoMonkey implements IRobot {
 	      }
 	      catch(IOException e){
 	         e.printStackTrace();
+	         
 	         return null;
 	      }
 	   }
@@ -233,7 +234,7 @@ public class DoMonkey implements IRobot {
 
 	   public void delay(int ms){
 	      try{
-	         Thread.sleep(ms);
+	         Thread.sleep((long) ms);
 	      }
 	      catch(InterruptedException e){
 	      }

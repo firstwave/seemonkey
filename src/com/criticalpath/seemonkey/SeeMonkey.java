@@ -60,10 +60,10 @@ public class SeeMonkey extends Region implements IScreen{
 	   return capture(getBounds());
 	}
 	public ScreenImage capture(int x, int y, int w, int h) {
-	   return _robot.captureScreen(new Rectangle(x,y,w,h));
+	   return capture(new Rectangle(x,y,w,h));
 	}
 	public ScreenImage capture(Rectangle rect) {
-	   return _robot.captureScreen(rect);
+		return _robot.captureScreen(rect);
 	}
 	public ScreenImage capture(Region reg) {
 	   return capture(reg.getROI());
@@ -128,6 +128,19 @@ public class SeeMonkey extends Region implements IScreen{
     	sleep();
     }
     
+//    public <PSRML> int click(PSRML target, int modifiers) throws  FindFailed{
+//    	// the click wrappers are needed to add in autoDelay, otherwise adb chokes on rapid-fire clicks
+//    	int rv = super.click(target, modifiers);
+//    	System.out.println("SeeMonkey.click(t,m)");
+//    	sleep();
+//    	return rv;
+//    }
+//    public <PSRML> int click(PSRML target) throws  FindFailed{
+//    	// the click wrappers are needed to add in autoDelay, otherwise adb chokes on rapid-fire clicks
+//    	System.out.println("SeeMonkey.click(t)");
+//    	return click(target, 0);
+//    }
+    
     public int type(String text) {
 		String word = "";
     	for (int i = 0; i < text.length(); i++){
@@ -150,6 +163,7 @@ public class SeeMonkey extends Region implements IScreen{
     }
     
     public int sequence(String sequence) {
+    	// cloned the old EvilMonkey.sequence() concept here, although a bit limited in functionality
 		Boolean isLongPress;
     	String keycode = new String();
     	for (int i = 0; i < sequence.length(); i++) {
@@ -234,5 +248,6 @@ public class SeeMonkey extends Region implements IScreen{
             Thread.sleep(millis);
         } catch (InterruptedException e) {
         }
+        System.out.println("Zzz...");
     }
 }
