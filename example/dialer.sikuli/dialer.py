@@ -31,6 +31,14 @@ def clickKeypad(digits):
     for d in digits:
         print(d)
         scr.click(keypad[d])
-clickKeypad([5,0,3,8,100,0,9,9,0,6])
-scr.click("1321123015142.png")
+
+
+#scr.click("1321422637940.png")
+scr.press("MENU")
+#scr.click("1321423580099.png")
+#scr.click("Portland.png")
+#scr.click("1321422664341.png")
+
+#clickKeypad([5,0,3,4,6,7,100,2,3,5])
+#scr.click("1321123015142.png")
 exit(0)
