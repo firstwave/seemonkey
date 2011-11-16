@@ -4,12 +4,15 @@ package com.criticalpath.seemonkey;
 
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.sikuli.script.*;
 
 import com.android.chimpchat.*;
-import com.android.chimpchat.adb.AdbChimpDevice;
+//import com.android.chimpchat.adb.AdbChimpDevice;
 import com.android.chimpchat.core.*;
+//import com.android.monkeyrunner.MonkeyDevice;
 
 public class SeeMonkey extends Region implements IScreen{
 
@@ -17,14 +20,14 @@ public class SeeMonkey extends Region implements IScreen{
 	protected IRobot _robot;
 	public int autoDelay = 500;
 	public int longPressDelay = 1000;
+	public int warningShotDelay = 5000; // milliseconds to wait until 'monkey --port 12345' is called for reals
 	
 	public SeeMonkey() {
-		setAutoWaitTimeout(1000);
 		waitForConnection();
 	}
 	
 	public SeeMonkey(long timeout, String deviceId) {
-		setAutoWaitTimeout(1000);
+
 		waitForConnection(timeout, deviceId);
 	}
 	
@@ -33,9 +36,9 @@ public class SeeMonkey extends Region implements IScreen{
 	}
 	
 	private void waitForConnection(long timeoutMs, String deviceId){
-		//Map<String, String> options = new TreeMap<String, String>();
-		//options.put("backend", "adb");
-		ChimpChat chimpchat = ChimpChat.getInstance();
+		Map<String, String> options = new TreeMap<String, String>();
+		options.put("backend", "adb");
+		ChimpChat chimpchat = ChimpChat.getInstance(options);
 		
 		try{
 			if(timeoutMs<0 || deviceId == null) {
@@ -43,15 +46,18 @@ public class SeeMonkey extends Region implements IScreen{
 			} else {
 				_device = chimpchat.waitForConnection(timeoutMs, deviceId);
 			}
-
-			Debug.info("Properly started!!");
 		}
-		
 		catch(Exception e){
-			Debug.error("no android connection");
 			e.printStackTrace();
 		}
-
+		/*
+		 * For some reason, `monkey --port 12345` (AdbMonkeyDevice::AdbMonkeyDevice()) hangs 
+		 * on some Android builds (CM, I'm looking at you...)
+		 * For some other reason, issuing this command, letting it hang, and issuing it again opens port 12345.
+		 * It would be nice to be able to detect when this is absolutely necessary, cuz I don't liuke leaving my commands hang like that
+		 * Oh well, there you have it. The WARNING SHOT has been justified. 
+		 */
+		_device.shell("monkey --port 12345"); //WARNING SHOT
 		_robot = new DoMonkey(_device);
 		
 		Rectangle b = getBounds();
@@ -101,6 +107,11 @@ public class SeeMonkey extends Region implements IScreen{
 	
     public Object getMonkeyDevice() {
     	return _robot.getDevice();
+    }
+    
+    public String getArgs(String name) {
+    	// For instance, the command `java sikuli-jar -Dfoo=bar` gives us getArg("foo") = "bar"
+    	return System.getProperty(name);
     }
     
     public void press(String keycode, int type) {
@@ -254,3 +265,4 @@ public class SeeMonkey extends Region implements IScreen{
         System.out.println("Zzz...");
     }
 }
+

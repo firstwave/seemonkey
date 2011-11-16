@@ -9,4 +9,4 @@ CLASSPATH=${CLASSPATH}:$ANDROID_SDK/tools/lib/sdklib.jar
 CLASSPATH=${CLASSPATH}:$ANDROID_SDK/tools/lib/chimpchat.jar
 CLASSPATH=${CLASSPATH}:$ANDROID_SDK/tools/lib/ddmlib.jar
 
-java -cp $CLASSPATH org.sikuli.script.SikuliScript $*
+java -cp $CLASSPATH -Dseemonkey.variable="FOOD HOLE" org.sikuli.script.SikuliScript $*

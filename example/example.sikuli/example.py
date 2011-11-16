@@ -7,6 +7,7 @@ from org.sikuli.script import Settings
 
 Settings.MoveMouseDelay = 0.01
 Settings.AutoWaitTimeout = 10
+Settings.ActionLogs = True
 
 print "set up android connection"
 scr = SeeMonkey() # compatiable with Sikuli Screen/Region

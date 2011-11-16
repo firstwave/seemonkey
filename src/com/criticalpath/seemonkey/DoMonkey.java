@@ -15,7 +15,7 @@ import org.sikuli.script.IRobot;
 
 //import com.android.chimpchat.*;
 //import com.android.chimpchat.adb.*;
-import com.android.chimpchat.adb.AdbChimpDevice;
+//import com.android.chimpchat.adb.AdbChimpDevice;
 import com.android.chimpchat.core.*;
 import com.android.monkeyrunner.MonkeyDevice;
 public class DoMonkey implements IRobot {

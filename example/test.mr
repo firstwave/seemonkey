@@ -1,3 +1,0 @@
-import com.criticalpath.seemonkey.SeeMonkey
-scr = SeeMonkey()
-print("hot damn")
