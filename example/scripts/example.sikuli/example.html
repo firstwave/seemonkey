@@ -1,0 +1,149 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>example.sikuli</h2> <a href="example.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> unittest
+<span class="kw">import</span> sys
+
+<span class="kw">from</span> com.criticalpath.seemonkey <span class="kw">import</span> SeeMonkey
+<span class="kw">from</span> com.android.monkeyrunner <span class="kw">import</span> MonkeyDevice
+<span class="kw">from</span> org.sikuli.script <span class="kw">import</span> Settings
+
+Settings.MoveMouseDelay = <span class="dig">0.01</span>
+Settings.AutoWaitTimeout = <span class="dig">10</span>
+Settings.ActionLogs = True
+
+<span class="kw">print</span> <span class="str">"set up android connection"</span>
+scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</span>
+
+<span class="kw">assert</span> scr != None
+dev = scr.getMonkeyDevice() <span class="cmt"># Android Monkey device</span>
+scr.autoDelay = <span class="dig">1000</span>
+
+<span class="kw">class</span> TestAndroidBasic(unittest.TestCase):
+
+<span class="cmt">#    def testA_Sanity(self):
+</span><span class="cmt">#        img = scr.capture()
+</span><span class="cmt">#        assert img != None
+</span>
+<span class="cmt">#    def testC_Unlock(self):
+</span><span class="cmt">#        global scr, dev
+</span>
+<span class="cmt">#        if not scr.exists("1321044614384.png"):
+</span><span class="cmt">#            scr.press("BACK")
+</span><span class="cmt">#            scr.press("POWER")
+</span><span class="cmt">#            scr.wake()
+</span><span class="cmt">#        scr.dragDrop("1321044614384.png", "1321044637846.png")
+</span><span class="cmt">#    def testD_Locales(self):
+</span><span class="cmt">#        global scr, dev
+</span><span class="cmt">#        scr.click("1321045502125.png")
+</span><span class="cmt">#        scr.click("1321066951502.png")
+</span><span class="cmt">#        scr.wait("New")
+</span><span class="cmt">#        scr.click("New")
+</span><span class="cmt">#        scr.wait("EX")
+</span><span class="cmt">#        scr.type("foo bar")
+</span><span class="cmt">#        assert scr.exists("foo bar")
+</span><span class="cmt">#        scr.sequence("bbb. H. b..")
+</span>
+
+    <span class="kw">def</span> testE_P2PLogin(self):
+        <span class="kw">global</span> scr
+        <span class="cmt">#scr.click("1321121622020.png")
+</span>        <span class="cmt">#scr.dragDrop("1321083903909.png","1321083914785.png")
+</span>        scr.<span class="skw">click</span>(<img src="L2.png" />)
+        <span class="skw">wait</span>(<span class="str">"Secure Login"</span>)
+        scr.<span class="skw">dragDrop</span>(<img src="Paymq.png" />,<img src="Paymq.png" />)
+
+
+        <span class="kw">try</span>:
+            scr.<span class="skw">click</span>(<img src="Enteremail.png" />)
+            scr.<span class="skw">type</span>(<span class="str">"op-us-p12@paypal.com"</span>)
+        <span class="kw">except</span>:
+            scr.<span class="skw">click</span>(<img src="Enterpasswor.png" />)
+        scr.<span class="skw">type</span>(<span class="str">"11111111"</span>)
+        scr.press(<span class="str">"BACK"</span>)
+        scr.<span class="skw">click</span>(<img src="LogIn.png" />)
+
+        scr.<span class="skw">wait</span>(<img src="SendMoney.png" />)
+        scr.<span class="skw">click</span>(<img src="SendMoney.png" />)
+        scr.<span class="skw">wait</span>(<span class="str">"Send"</span>)
+        scr.<span class="skw">type</span>(<span class="str">"503-225-5050"</span>)
+        scr.press(<span class="str">"DPAD_DOWN"</span>)
+        scr.<span class="skw">type</span>(<span class="str">"1"</span>)
+        scr.press(<span class="str">"BACK"</span>)
+        <span class="kw">assert</span> scr.exists(<img src="1321087052128.png" />)
+
+
+<span class="kw">if</span> __name__ == <span class="str">'__main__'</span>:
+    unittest.main()
+</pre>
+</body>
+</html>

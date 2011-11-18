@@ -4,8 +4,10 @@ package com.criticalpath.seemonkey;
 
 import java.awt.Rectangle;
 import java.io.IOException;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+//import java.util.Map;
+//import java.util.TreeMap;
 
 import org.sikuli.script.*;
 
@@ -20,14 +22,16 @@ public class SeeMonkey extends Region implements IScreen{
 	protected IRobot _robot;
 	public int autoDelay = 500;
 	public int longPressDelay = 1000;
-	public int warningShotDelay = 5000; // milliseconds to wait until 'monkey --port 12345' is called for reals
+	private final int _monkeyPortDelay = 5000; // milliseconds to wait until 'monkey --port 12345' is called a second time
+	//private static final Logger _logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	private static final Logger _logger = Logger.getLogger("com.android.chimpchat.ChimpManager");
+
 	
 	public SeeMonkey() {
 		waitForConnection();
 	}
 	
 	public SeeMonkey(long timeout, String deviceId) {
-
 		waitForConnection(timeout, deviceId);
 	}
 	
@@ -36,10 +40,7 @@ public class SeeMonkey extends Region implements IScreen{
 	}
 	
 	private void waitForConnection(long timeoutMs, String deviceId){
-		Map<String, String> options = new TreeMap<String, String>();
-		options.put("backend", "adb");
-		ChimpChat chimpchat = ChimpChat.getInstance(options);
-		
+		ChimpChat chimpchat = ChimpChat.getInstance();
 		try{
 			if(timeoutMs<0 || deviceId == null) {
 				_device = chimpchat.waitForConnection();
@@ -54,10 +55,12 @@ public class SeeMonkey extends Region implements IScreen{
 		 * For some reason, `monkey --port 12345` (AdbMonkeyDevice::AdbMonkeyDevice()) hangs 
 		 * on some Android builds (CM, I'm looking at you...)
 		 * For some other reason, issuing this command, letting it hang, and issuing it again opens port 12345.
-		 * It would be nice to be able to detect when this is absolutely necessary, cuz I don't liuke leaving my commands hang like that
-		 * Oh well, there you have it. The WARNING SHOT has been justified. 
+		 * It would be nice to be able to detect when this is absolutely necessary, cuz I don't like leaving my commands 
+		 * hanging like that. Looking at the source for AdbMonkeyDevice, it looks like the android devs don't really know
+		 * how to handle this either.
 		 */
-		_device.shell("monkey --port 12345"); //WARNING SHOT
+		_device.shell("monkey --port 12345");
+		sleep(_monkeyPortDelay); // very IMPORTANT!
 		_robot = new DoMonkey(_device);
 		
 		Rectangle b = getBounds();
@@ -77,6 +80,8 @@ public class SeeMonkey extends Region implements IScreen{
 	public ScreenImage capture(Region reg) {
 	   return capture(reg.getROI());
 	}
+	
+	
 
 	public Rectangle getBounds(){
 		String width = _device.getProperty("display.width");
@@ -136,26 +141,15 @@ public class SeeMonkey extends Region implements IScreen{
     }
     
     public void longPress(String keycode) {
+    	// Long Press in this instance refers to long pressing a key. For long pressing screen elements, see longClick()
     	_device.press("KEYCODE_" + keycode, TouchPressType.DOWN);
     	sleep(longPressDelay);
     	_device.press("KEYCODE_" + keycode, TouchPressType.UP);
     	sleep();
     }
-    
-//    public <PSRML> int click(PSRML target, int modifiers) throws  FindFailed{
-//    	// the click wrappers are needed to add in autoDelay, otherwise adb chokes on rapid-fire clicks
-//    	int rv = super.click(target, modifiers);
-//    	System.out.println("SeeMonkey.click(t,m)");
-//    	sleep();
-//    	return rv;
-//    }
-//    public <PSRML> int click(PSRML target) throws  FindFailed{
-//    	// the click wrappers are needed to add in autoDelay, otherwise adb chokes on rapid-fire clicks
-//    	System.out.println("SeeMonkey.click(t)");
-//    	return click(target, 0);
-//    }
-    
+   
     public int type(String text) {
+    	// MonkeyDevice.type() still has no support for spaces, so here's a workaround wrapper function
 		String word = "";
     	for (int i = 0; i < text.length(); i++){
     	    char c = text.charAt(i);        
@@ -219,7 +213,43 @@ public class SeeMonkey extends Region implements IScreen{
     	}
     	return 0;
     }
-   
+    
+    public <PSMRL> int click(PSMRL target) throws FindFailed {
+    	return click(target, 0);
+    }
+    public <PSMRL> int click(PSMRL target, int modifiers) throws FindFailed {
+    	int rv = super.click(target, modifiers);
+    	sleep();
+    	return rv;
+    }
+    public <PSRML> int rightClick(PSRML target) throws FindFailed {
+    	// It seems like a long-press is analogoous to a right-click in Android land.
+    	return longClick(target, 0);
+    }
+    
+    public <PSRML> int rightClisk(PSRML target, int modifiers) throws FindFailed{
+    	return longClick(target, modifiers);
+    }
+    
+    public <PSRML> int longClick(PSRML target) throws FindFailed {
+    	// the longClick action is what is referred to in Android-land as a Long Press. The reason I've called it longClick is
+    	// that I'm trying to maintain some consistency with the built-in sikuli API, which calls
+    	// a keypress a 'press' and a screen tap a 'click'
+    	return longClick(target, 0);
+    }
+    
+    public <PSRML> int longClick(PSRML target, int modifiers) throws FindFailed {
+    	Location loc = getLocationFromPSRML(target);
+    	if ( loc != null) {
+	    	_robot.mouseMove(loc.x, loc.y);
+	    	_robot.mousePress(modifiers);
+	    	sleep(longPressDelay);
+	    	_robot.mouseRelease(modifiers);
+	    	sleep();
+	    	return 1;
+    		}
+    	return 0;
+    }
     
     // SEARCH METHODS
     public Boolean exists(String resource) {
@@ -262,7 +292,6 @@ public class SeeMonkey extends Region implements IScreen{
             Thread.sleep(millis);
         } catch (InterruptedException e) {
         }
-        System.out.println("Zzz...");
     }
 }
 

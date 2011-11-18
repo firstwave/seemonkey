@@ -1,0 +1,208 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>p2pdemo.sikuli</h2> <a href="p2pdemo.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> unittest
+<span class="kw">import</span> sys
+<span class="kw">import</span> logging
+
+
+<span class="kw">from</span> com.criticalpath.seemonkey <span class="kw">import</span> SeeMonkey
+<span class="kw">from</span> com.android.monkeyrunner <span class="kw">import</span> MonkeyDevice
+<span class="kw">from</span> org.sikuli.script <span class="kw">import</span> Settings
+
+Settings.MoveMouseDelay = <span class="dig">0.01</span>
+Settings.AutoWaitTimeout = <span class="dig">10</span>
+
+Settings.ActionLogs = False
+Settings.DebugLogs = False
+<span class="kw">print</span> <span class="str">"set up android connection"</span>
+scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</span>
+
+<span class="kw">assert</span> scr != None
+dev = scr.getMonkeyDevice() <span class="cmt"># Android Monkey device</span>
+scr.autoDelay = <span class="dig">250</span>
+<span class="kw">class</span> TestAndroidBasic(unittest.TestCase):
+    <span class="kw">def</span> testA_setup(self):
+        scr.wake()
+        <span class="kw">if</span> scr.exists(<img src="1321469716016.png" />):
+            <span class="kw">if</span> scr.exists(<img src="1321472659750.png" />):
+                scr.<span class="skw">dragDrop</span>(Pattern(<img src="1321469716016.png" />).similar(<span class="dig">0.73</span>),<img src="1321472659750.png" />)
+            <span class="kw">else</span>:
+                scr.<span class="skw">dragDrop</span>(Pattern(<img src="1321469716016.png" />).similar(<span class="dig">0.73</span>),<img src="1321469736786.png" />)
+        <span class="kw">while</span> <span class="kw">not</span> scr.exists(<img src="1321469893355.png" />):
+            scr.press(<span class="str">'HOME'</span>)
+
+        <span class="cmt"># Clear paypal data
+</span>        scr.press(<span class="str">'MENU'</span>)
+        scr.<span class="skw">click</span>(<img src="1321471500918.png" />)
+        scr.<span class="skw">click</span>(<img src="QApplication.png" />)
+        scr.<span class="skw">click</span>(<img src="Manageapplic.png" />)
+        <span class="kw">while</span> <span class="kw">not</span> scr.exists(<img src="lEPayPal.png" />):
+            scr.press(<span class="str">'DPAD_DOWN'</span>)
+            scr.press(<span class="str">'DPAD_DOWN'</span>)
+            scr.press(<span class="str">'DPAD_DOWN'</span>)
+
+        scr.<span class="skw">click</span>(<img src="lEPayPal.png" />)
+        <span class="kw">try</span>:
+            scr.<span class="skw">click</span>(Pattern(<img src="Cleardata.png" />).similar(<span class="dig">0.92</span>))
+            scr.<span class="skw">click</span>(Pattern(<img src="OK.png" />).similar(<span class="dig">0.83</span>))
+            <span class="kw">print</span>(<span class="str">"Data cleared."</span>)
+        <span class="kw">except</span>:
+            <span class="cmt"># because the data may already be cleared
+</span>            <span class="kw">pass</span>
+
+        <span class="cmt"># go back to homescreen and launch the paypal app
+</span>
+        <span class="kw">while</span> <span class="kw">not</span> scr.exists(<img src="1321469893355.png" />):
+            scr.press(<span class="str">'HOME'</span>)
+        scr.<span class="skw">click</span>(<img src="1321469893355.png" />)
+        <span class="kw">while</span> <span class="kw">not</span> scr.exists(Pattern(<img src="1321469932497.png" />).similar(<span class="dig">0.88</span>)):
+            scr.press(<span class="str">'DPAD_DOWN'</span>)
+            scr.press(<span class="str">'DPAD_DOWN'</span>)
+            scr.press(<span class="str">'DPAD_DOWN'</span>)
+
+        scr.<span class="skw">click</span>(<img src="1321469932497.png" />)
+        scr.<span class="skw">wait</span>(Pattern(<img src="Accept.png" />).similar(<span class="dig">0.89</span>), <span class="dig">10</span>)
+
+    <span class="kw">def</span> testB_UserAgreement(self):
+        <span class="kw">assert</span> scr.exists(Pattern(<img src="1321474789331.png" />).similar(<span class="dig">0.87</span>))
+        <span class="kw">assert</span> scr.exists(Pattern(<img src="Accept.png" />).similar(<span class="dig">0.89</span>))
+
+        <span class="cmt"># verify links in user agreement
+</span>        <span class="cmt"># these are visible by default on WVGA screens
+</span>        scr.<span class="skw">click</span>(<img src="PrlvacvPollc.png" />)
+        scr.<span class="skw">wait</span>(<img src="PB.png" />, <span class="dig">30</span>) <span class="cmt"># indicates that the website has loaded</span>
+        <span class="kw">assert</span> scr.exists(<img src="PrivacyPolic.png" />) <span class="cmt"># has the correct page loaded?</span>
+
+        scr.press(<span class="str">'BACK'</span>)
+        scr.<span class="skw">click</span>(Pattern(<img src="Accept.png" />).similar(<span class="dig">0.89</span>))
+        scr.<span class="skw">wait</span>(<img src="SecureLogin.png" />)
+
+    <span class="kw">def</span> testC_Login(self):
+        <span class="kw">assert</span> scr.exists(<img src="Password.png" />)
+        <span class="kw">assert</span> scr.exists(Pattern(<img src="Enteremail.png" />).similar(<span class="dig">0.77</span>)) <span class="cmt"># should be focused and empty</span>
+        scr.longClick(<img src="Paymq-1.png" />)
+        scr.<span class="skw">wait</span>(<img src="Menu.png" />, <span class="dig">10</span>)
+        <span class="kw">try</span>:
+            scr.<span class="skw">click</span>(Pattern(<img src="stage2mobie0.png" />).similar(<span class="dig">0.99</span>).targetOffset(-<span class="dig">87</span>,<span class="dig">3</span>))
+            scr.<span class="skw">click</span>(Pattern(<img src="EUseMEPDIaut.png" />).targetOffset(-<span class="dig">182</span>,<span class="dig">9</span>))
+        <span class="kw">except</span>:
+            <span class="cmt"># must already be selected
+</span>            <span class="kw">pass</span>
+        scr.press(<span class="str">'BACK'</span>)
+        scr.<span class="skw">wait</span>(<img src="Password.png" />)
+        scr.<span class="skw">type</span>(<span class="str">'op-us-p12@paypal.com'</span>)
+        scr.press(<span class="str">'ENTER'</span>)
+        scr.<span class="skw">type</span>(<span class="str">'11111111'</span>)
+        <span class="kw">if</span> scr.exists(<img src="1321476124694.png" />):
+            scr.press(<span class="str">'BACK'</span>)
+        scr.<span class="skw">click</span>(<img src="LogIn-1.png" />)
+        <span class="skw">sleep</span>(<span class="dig">5</span>) <span class="cmt"># wait five seconds, to see if login failed</span>
+
+        <span class="kw">if</span> scr.exists(<img src="1321560706440.png" />):
+            <span class="cmt"># login failed, try again
+</span>            scr.<span class="skw">click</span>(<img src="1321560706440.png" />)
+            scr.<span class="skw">type</span>(<span class="str">'11111111'</span>)
+            <span class="kw">if</span> scr.exists(<img src="1321476124694.png" />):
+                scr.press(<span class="str">'BACK'</span>)
+            scr.<span class="skw">click</span>(<img src="LogIn-1.png" />)
+
+        scr.<span class="skw">wait</span>(<img src="HPaymq.png" />, <span class="dig">30</span>)
+
+
+    <span class="kw">def</span> testD_SendMoney(self):
+        scr.<span class="skw">click</span>(<img src="SendMoney.png" />)
+        scr.<span class="skw">wait</span>(<img src="SendMoney-1.png" />)
+        scr.<span class="skw">type</span>(<span class="str">'op-us-p8@paypal.com'</span>)
+        <span class="skw">sleep</span>(<span class="dig">1</span>)
+        scr.press(<span class="str">'DPAD_DOWN'</span>)
+        scr.<span class="skw">type</span>(<span class="str">'.05'</span>)
+        <span class="kw">if</span> scr.exists(<img src="1321476399095.png" />):
+            scr.press(<span class="str">'BACK'</span>)
+        scr.<span class="skw">click</span>(Pattern(<img src="Impayingforg.png" />).targetOffset(-<span class="dig">192</span>,-<span class="dig">2</span>))
+        scr.<span class="skw">click</span>(<img src="1321476474973.png" />)
+        scr.<span class="skw">wait</span>(<img src="Paymentdetai.png" />, <span class="dig">10</span>)
+        scr.<span class="skw">click</span>(<img src="EiltI3mSS3g.png" />)
+        scr.<span class="skw">type</span>(<span class="str">'SeeMonkey 12345'</span>)
+        <span class="kw">if</span> scr.exists(<img src="1321476124694.png" />):
+            scr.press(<span class="str">'BACK'</span>)
+        <span class="kw">assert</span> scr.exists(<img src="Send.png" />)
+
+    <span class="kw">def</span> testZ_Failure(self):
+        <span class="kw">assert</span> scr.exists(<span class="str">"DOES NOT EXIST"</span>)
+<span class="kw">if</span> __name__ == <span class="str">'__main__'</span>:
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestAndroidBasic)
+    unittest.TextTestRunner(verbosity=<span class="dig">2</span>).run(suite)
+    exit(<span class="dig">0</span>)
+</pre>
+</body>
+</html>
