@@ -1,7 +1,13 @@
 import unittest
 import sys
 
+print(sys.path)
 
+try:
+    import foo
+except:
+    print("Could not find module 'foo'")
+    
 from com.criticalpath.seemonkey import SeeMonkey
 from com.android.monkeyrunner import MonkeyDevice
 from org.sikuli.script import Settings

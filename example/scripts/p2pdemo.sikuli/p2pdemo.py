@@ -1,7 +1,5 @@
 import unittest
 import sys
-import logging
-
 
 from com.criticalpath.seemonkey import SeeMonkey
 from com.android.monkeyrunner import MonkeyDevice
@@ -18,6 +16,9 @@ scr = SeeMonkey() # compatiable with Sikuli Screen/Region
 assert scr != None
 dev = scr.getMonkeyDevice() # Android Monkey device
 scr.autoDelay = 250
+
+
+
 class TestAndroidBasic(unittest.TestCase):
     def testA_setup(self):
         scr.wake()
@@ -123,10 +124,21 @@ class TestAndroidBasic(unittest.TestCase):
         scr.type('SeeMonkey 12345')
         if scr.exists("1321476124694.png"):
             scr.press('BACK')
-        assert scr.exists("Send.png")
-
-    def testZ_Failure(self):
-        assert scr.exists("DOES NOT EXIST")
+        scr.click("Send.png")
+    def testE_History(self):
+        scr.wait("G0toHistory.png", 30)
+        scr.click("G0toHistory.png")
+        scr.wait("uested.png", 60) # pull-down arrow on History entry
+        scr.click(Pattern("uested.png").targetOffset(-10,62))
+        scr.wait("Moredetail.png")
+        scr.click("Moredetail.png")
+        scr.wait("Moredetails.png")
+        assert scr.exists('12345')
+        scr.click("Close.png")
+        scr.press("BACK")
+        scr.press("MENU")
+        scr.click("1321942190724.png")
+        
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestAndroidBasic)
     unittest.TextTestRunner(verbosity=2).run(suite)

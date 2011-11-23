@@ -67,18 +67,11 @@
    </head>
 <body>
 <div class="info">
-<h2>sanity.sikuli</h2> <a href="sanity.zip">(Download this script)</a>
+<h2>angry-birds.sikuli</h2> <a href="angry-birds.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
 <span class="kw">import</span> unittest
 <span class="kw">import</span> sys
-
-<span class="kw">print</span>(sys.path)
-
-<span class="kw">try</span>:
-    <span class="kw">import</span> foo
-<span class="kw">except</span>:
-    <span class="kw">print</span>(<span class="str">"Could not find module 'foo'"</span>)
 
 <span class="kw">from</span> com.criticalpath.seemonkey <span class="kw">import</span> SeeMonkey
 <span class="kw">from</span> com.android.monkeyrunner <span class="kw">import</span> MonkeyDevice
@@ -94,14 +87,28 @@ scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</spa
 
 <span class="kw">assert</span> scr != None
 dev = scr.getMonkeyDevice() <span class="cmt"># Android Monkey device</span>
-scr.autoDelay = <span class="dig">100</span>
-<span class="kw">class</span> TestAndroidBasic(unittest.TestCase):
-    <span class="kw">def</span> testA_Sanity(self):
-        scr.wake()
-        scr.press(<span class="str">'HOME'</span>)
+scr.autoDelay = <span class="dig">250</span>
 
+<span class="kw">class</span> angryBirds(unittest.TestCase):
+    <span class="kw">def</span> test_0(self):
+        <span class="kw">while</span> <span class="kw">not</span> scr.exists(<img src="app-icon.png" />):
+            scr.press(<span class="str">'HOME'</span>)
+        scr.<span class="skw">click</span>(<img src="1321928060768.png" />)
+        scr.<span class="skw">wait</span>(<img src="play.png" />, <span class="dig">30</span>)
+        scr.<span class="skw">click</span>(<img src="1321928134902.png" />)
+        scr.<span class="skw">click</span>(<img src="NVilPomnzv52.png" />)
+        scr.<span class="skw">click</span>(Pattern(<img src="1321928202919.png" />).similar(<span class="dig">0.85</span>))
+
+    <span class="kw">def</span> test_1_1(self):
+        <span class="kw">print</span>(<span class="str">"Level 1-1"</span>)
+        scr.<span class="skw">wait</span>(<img src="red-bird.png" />, <span class="dig">30</span>)
+        scr.<span class="skw">dragDrop</span>(<img src="Y1.png" />, Pattern(<img src="Y1.png" />).targetOffset(-<span class="dig">238</span>,<span class="dig">100</span>))<span class="cmt"># first shot</span>
+        scr.<span class="skw">wait</span>(<img src="level-list.png" />, <span class="dig">30</span>)
+        scr.<span class="skw">click</span>(<img src="level-list.png" />)
 <span class="kw">if</span> __name__ == <span class="str">'__main__'</span>:
     unittest.main()
+
+    exit(<span class="dig">0</span>)
 </pre>
 </body>
 </html>
