@@ -1,4 +1,7 @@
+# OS generated files
 .DS_Store
-*.html
+
+# generated files
 test-reports/
 bin/
+*.html
