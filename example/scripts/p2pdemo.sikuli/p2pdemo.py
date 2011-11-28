@@ -69,7 +69,7 @@ class TestAndroidBasic(unittest.TestCase):
         # verify links in user agreement
         # these are visible by default on WVGA screens
         scr.click("PrlvacvPollc.png")
-        scr.wait("PB.png", 30) # indicates that the website has loaded
+        scr.wait("PB.png", 60) # indicates that the website has loaded
         assert scr.exists("PrivacyPolic.png") # has the correct page loaded?
 
         scr.press('BACK')
@@ -138,7 +138,6 @@ class TestAndroidBasic(unittest.TestCase):
         scr.press("BACK")
         scr.press("MENU")
         scr.click("1321942190724.png")
-        
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestAndroidBasic)
     unittest.TextTestRunner(verbosity=2).run(suite)

@@ -1,13 +1,8 @@
 import unittest
+import xmlrunner
 import sys
 
-print(sys.path)
 
-try:
-    import foo
-except:
-    print("Could not find module 'foo'")
-    
 from com.criticalpath.seemonkey import SeeMonkey
 from com.android.monkeyrunner import MonkeyDevice
 from org.sikuli.script import Settings
@@ -24,9 +19,12 @@ assert scr != None
 dev = scr.getMonkeyDevice() # Android Monkey device
 scr.autoDelay = 100
 class TestAndroidBasic(unittest.TestCase):
-    def testA_Sanity(self):
+    def testA_Success(self):
         scr.wake()
         scr.press('HOME')
+    
+    def testB_Failure(self):
+        assert False
 
 if __name__ == '__main__':
-    unittest.main() 
+    unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'))

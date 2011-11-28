@@ -71,14 +71,9 @@
 </div>
 <pre class="sikuli-code">
 <span class="kw">import</span> unittest
+<span class="kw">import</span> xmlrunner
 <span class="kw">import</span> sys
 
-<span class="kw">print</span>(sys.path)
-
-<span class="kw">try</span>:
-    <span class="kw">import</span> foo
-<span class="kw">except</span>:
-    <span class="kw">print</span>(<span class="str">"Could not find module 'foo'"</span>)
 
 <span class="kw">from</span> com.criticalpath.seemonkey <span class="kw">import</span> SeeMonkey
 <span class="kw">from</span> com.android.monkeyrunner <span class="kw">import</span> MonkeyDevice
@@ -96,12 +91,15 @@ scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</spa
 dev = scr.getMonkeyDevice() <span class="cmt"># Android Monkey device</span>
 scr.autoDelay = <span class="dig">100</span>
 <span class="kw">class</span> TestAndroidBasic(unittest.TestCase):
-    <span class="kw">def</span> testA_Sanity(self):
+    <span class="kw">def</span> testA_Success(self):
         scr.wake()
         scr.press(<span class="str">'HOME'</span>)
 
+    <span class="kw">def</span> testB_Failure(self):
+        <span class="kw">assert</span> False
+
 <span class="kw">if</span> __name__ == <span class="str">'__main__'</span>:
-    unittest.main()
+    unittest.main(testRunner=xmlrunner.XMLTestRunner(output=<span class="str">'test-reports'</span>))
 </pre>
 </body>
 </html>

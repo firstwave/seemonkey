@@ -141,7 +141,7 @@ scr.autoDelay = <span class="dig">250</span>
         <span class="cmt"># verify links in user agreement
 </span>        <span class="cmt"># these are visible by default on WVGA screens
 </span>        scr.<span class="skw">click</span>(<img src="PrlvacvPollc.png" />)
-        scr.<span class="skw">wait</span>(<img src="PB.png" />, <span class="dig">30</span>) <span class="cmt"># indicates that the website has loaded</span>
+        scr.<span class="skw">wait</span>(<img src="PB.png" />, <span class="dig">60</span>) <span class="cmt"># indicates that the website has loaded</span>
         <span class="kw">assert</span> scr.exists(<img src="PrivacyPolic.png" />) <span class="cmt"># has the correct page loaded?</span>
 
         scr.press(<span class="str">'BACK'</span>)
@@ -210,7 +210,6 @@ scr.autoDelay = <span class="dig">250</span>
         scr.press(<span class="str">"BACK"</span>)
         scr.press(<span class="str">"MENU"</span>)
         scr.<span class="skw">click</span>(<img src="1321942190724.png" />)
-
 <span class="kw">if</span> __name__ == <span class="str">'__main__'</span>:
     suite = unittest.TestLoader().loadTestsFromTestCase(TestAndroidBasic)
     unittest.TextTestRunner(verbosity=<span class="dig">2</span>).run(suite)
