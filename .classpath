@@ -2,11 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="libs/guavalib.jar"/>
-	<classpathentry kind="lib" path="libs/jython.jar"/>
-	<classpathentry kind="lib" path="libs/monkeyrunner.jar"/>
 	<classpathentry kind="lib" path="libs/sikuli-script.jar"/>
-	<classpathentry kind="lib" path="libs/sdklib.jar"/>
-	<classpathentry kind="lib" path="libs/chimpchat.jar"/>
+	<classpathentry kind="var" path="ANDROID_SDK_LIB/chimpchat.jar"/>
+	<classpathentry kind="var" path="ANDROID_SDK_LIB/monkeyrunner.jar"/>
+	<classpathentry kind="var" path="ANDROID_SDK_LIB/guavalib.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

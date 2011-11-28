@@ -23,9 +23,6 @@ public class SeeMonkey extends Region implements IScreen{
 	public int autoDelay = 500;
 	public int longPressDelay = 1000;
 	private final int _monkeyPortDelay = 5000; // milliseconds to wait until 'monkey --port 12345' is called a second time
-	//private static final Logger _logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-	private static final Logger _logger = Logger.getLogger("com.android.chimpchat.ChimpManager");
-
 	
 	public SeeMonkey() {
 		waitForConnection();
@@ -40,6 +37,13 @@ public class SeeMonkey extends Region implements IScreen{
 	}
 	
 	private void waitForConnection(long timeoutMs, String deviceId){
+		if (deviceId == null)
+			Debug.info("Waiting for connection to default device");
+		else
+			Debug.info("Waiting for connection to device '" + deviceId + "'");
+		
+		Debug.info("It is not unusual to see a com.android.ddmlib.ShellCommandUnresponsiveException");
+	
 		ChimpChat chimpchat = ChimpChat.getInstance();
 		try{
 			if(timeoutMs<0 || deviceId == null) {
