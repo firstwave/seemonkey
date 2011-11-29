@@ -76,11 +76,8 @@
 
 
 <span class="kw">from</span> com.criticalpath.seemonkey <span class="kw">import</span> SeeMonkey
-<span class="kw">from</span> com.android.monkeyrunner <span class="kw">import</span> MonkeyDevice
-<span class="kw">from</span> org.sikuli.script <span class="kw">import</span> Settings
-
-Settings.MoveMouseDelay = <span class="dig">0.01</span>
-Settings.AutoWaitTimeout = <span class="dig">10</span>
+<span class="cmt">#from com.android.monkeyrunner import MonkeyDevice
+</span><span class="kw">from</span> org.sikuli.script <span class="kw">import</span> Settings
 
 <span class="kw">print</span> <span class="str">"set up android connection"</span>
 scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</span>
