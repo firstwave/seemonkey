@@ -76,19 +76,14 @@
 
 
 <span class="kw">from</span> com.criticalpath.seemonkey <span class="kw">import</span> SeeMonkey
-<span class="cmt">#from com.android.monkeyrunner import MonkeyDevice
-</span><span class="kw">from</span> org.sikuli.script <span class="kw">import</span> Settings
 
-<span class="kw">print</span> <span class="str">"set up android connection"</span>
-scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</span>
+scr = SeeMonkey()
 
 <span class="kw">assert</span> scr != None
-dev = scr.getMonkeyDevice() <span class="cmt"># Android Monkey device</span>
+
 scr.autoDelay = <span class="dig">100</span>
 <span class="kw">class</span> SeeMonkeyTest(unittest.TestCase):
     <span class="kw">def</span> testSanity(self):
-        <span class="kw">print</span>(<span class="str">"This is an example of output on STDOUT"</span>)
-        sys.stderr.write(<span class="str">"This is an example of output on STDERR"</span>)
         scr.wake()
         scr.press(<span class="str">'HOME'</span>)
 
