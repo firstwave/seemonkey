@@ -23,7 +23,9 @@ public class SeeMonkey extends Region implements IScreen{
 	public int autoDelay = 500;
 	public int longPressDelay = 1000;
 	private final int _monkeyPortDelay = 5000; // milliseconds to wait until 'monkey --port 12345' is called a second time
-	
+	static {
+		Settings.MoveMouseDelay = (float) 0.01;
+	}
 	public SeeMonkey() {
 		waitForConnection();
 	}

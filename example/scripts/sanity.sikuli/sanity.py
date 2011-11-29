@@ -10,21 +10,18 @@ from org.sikuli.script import Settings
 Settings.MoveMouseDelay = 0.01
 Settings.AutoWaitTimeout = 10
 
-Settings.ActionLogs = False
-Settings.DebugLogs = False
 print "set up android connection"
 scr = SeeMonkey() # compatiable with Sikuli Screen/Region
 
 assert scr != None
 dev = scr.getMonkeyDevice() # Android Monkey device
 scr.autoDelay = 100
-class TestAndroidBasic(unittest.TestCase):
-    def testA_Success(self):
+class SeeMonkeyTest(unittest.TestCase):
+    def testSanity(self):
+        print("This is an example of output on STDOUT")
+        sys.stderr.write("This is an example of output on STDERR")
         scr.wake()
         scr.press('HOME')
-    
-    def testB_Failure(self):
-        assert False
-
+     
 if __name__ == '__main__':
     unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'))

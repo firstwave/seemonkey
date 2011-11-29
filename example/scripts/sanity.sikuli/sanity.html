@@ -82,21 +82,18 @@
 Settings.MoveMouseDelay = <span class="dig">0.01</span>
 Settings.AutoWaitTimeout = <span class="dig">10</span>
 
-Settings.ActionLogs = False
-Settings.DebugLogs = False
 <span class="kw">print</span> <span class="str">"set up android connection"</span>
 scr = SeeMonkey() <span class="cmt"># compatiable with Sikuli Screen/Region</span>
 
 <span class="kw">assert</span> scr != None
 dev = scr.getMonkeyDevice() <span class="cmt"># Android Monkey device</span>
 scr.autoDelay = <span class="dig">100</span>
-<span class="kw">class</span> TestAndroidBasic(unittest.TestCase):
-    <span class="kw">def</span> testA_Success(self):
+<span class="kw">class</span> SeeMonkeyTest(unittest.TestCase):
+    <span class="kw">def</span> testSanity(self):
+        <span class="kw">print</span>(<span class="str">"This is an example of output on STDOUT"</span>)
+        sys.stderr.write(<span class="str">"This is an example of output on STDERR"</span>)
         scr.wake()
         scr.press(<span class="str">'HOME'</span>)
-
-    <span class="kw">def</span> testB_Failure(self):
-        <span class="kw">assert</span> False
 
 <span class="kw">if</span> __name__ == <span class="str">'__main__'</span>:
     unittest.main(testRunner=xmlrunner.XMLTestRunner(output=<span class="str">'test-reports'</span>))
