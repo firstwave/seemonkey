@@ -4,10 +4,6 @@ package com.criticalpath.seemonkey;
 
 import java.awt.Rectangle;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-//import java.util.Map;
-//import java.util.TreeMap;
 
 import org.sikuli.script.*;
 
@@ -42,8 +38,7 @@ public class SeeMonkey extends Region implements IScreen{
 		if (deviceId == null)
 			Debug.info("Waiting for connection to default device");
 		else
-			Debug.info("Waiting for connection to device '" + deviceId + "'");
-		
+			Debug.info("Waiting for connection to device '" + deviceId + "'");		
 		Debug.info("It is not unusual to see a com.android.ddmlib.ShellCommandUnresponsiveException");
 	
 		ChimpChat chimpchat = ChimpChat.getInstance();
