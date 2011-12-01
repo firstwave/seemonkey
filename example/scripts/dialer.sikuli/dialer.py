@@ -39,6 +39,6 @@ scr.press("MENU")
 #scr.click("Portland.png")
 #scr.click("1321422664341.png")
 
-#clickKeypad([5,0,3,4,6,7,100,2,3,5])
+clickKeypad([5,0,3,4,6,7,100,2,3,5])
 #scr.click("1321123015142.png")
 exit(0)

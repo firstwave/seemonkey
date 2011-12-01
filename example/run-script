@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 '''
-Author: Oliver Bartley
-Date: 11/28/2011
+Author: Oliver Bartley (obartley@ebay.com)
+Date: 28 NOV 2011
 Version: 1.0
 
 Configure the Java environment and Sikuli interpereter to run .sikuli scripts that make use of SeeMonkey objects.
