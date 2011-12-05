@@ -5,3 +5,4 @@
 test-reports/
 bin/
 *.html
+update-pkg.sh
