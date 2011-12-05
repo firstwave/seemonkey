@@ -121,7 +121,9 @@ public class SeeMonkey extends Region implements IScreen{
     }
     
     public void press(String keycode, int type) {
-    	keycode = "KEYCODE_" + keycode.toUpperCase();
+    	keycode = keycode.toUpperCase();
+    	if (! keycode.startsWith("KEYCODE_"))
+    		keycode = "KEYCODE_" + keycode;
     	switch (type) {
     	case 0: _device.press(keycode, TouchPressType.UP); break;
     	case 1: _device.press(keycode, TouchPressType.DOWN); break;
@@ -135,7 +137,7 @@ public class SeeMonkey extends Region implements IScreen{
     }
     
     public void press(String keycode, String type) {
-    	keycode = keycode.toUpperCase();
+    	type = type.toUpperCase();
     	if (type == "UP") press(keycode, 0);
     	else if (type == "DOWN") press(keycode, 1);
     	else press(keycode, 2); 
@@ -143,6 +145,10 @@ public class SeeMonkey extends Region implements IScreen{
     
     public void longPress(String keycode) {
     	// Long Press in this instance refers to long pressing a key. For long pressing screen elements, see longClick()
+    	keycode = keycode.toUpperCase();
+    	if (! keycode.startsWith("KEYCODE_"))
+    		keycode = "KEYCODE_" + keycode;
+    	
     	_device.press("KEYCODE_" + keycode, TouchPressType.DOWN);
     	sleep(longPressDelay);
     	_device.press("KEYCODE_" + keycode, TouchPressType.UP);
