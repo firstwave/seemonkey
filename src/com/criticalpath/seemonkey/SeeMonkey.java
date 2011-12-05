@@ -116,8 +116,8 @@ public class SeeMonkey extends Region implements IScreen{
     }
     
     public String getArgs(String name) {
-    	// For instance, the command `java sikuli-jar -Dfoo=bar` gives us getArg("foo") = "bar"
-    	return System.getProperty(name);
+    	// the run-script command adds the "seemonkey." namespace to make this a bit safer
+    	return System.getProperty("seemonkey." + name);
     }
     
     public void press(String keycode, int type) {
@@ -136,8 +136,8 @@ public class SeeMonkey extends Region implements IScreen{
     
     public void press(String keycode, String type) {
     	keycode = keycode.toUpperCase();
-    	if (keycode == "UP") press(keycode, 0);
-    	else if (keycode == "DOWN") press(keycode, 1);
+    	if (type == "UP") press(keycode, 0);
+    	else if (type == "DOWN") press(keycode, 1);
     	else press(keycode, 2); 
     }
     
